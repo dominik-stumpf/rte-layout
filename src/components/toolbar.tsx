@@ -18,13 +18,13 @@ import {
   AlignLeft,
   AlignRight,
   Bold,
+  ChevronDown,
   Italic,
   LucideIcon,
   Redo,
+  Strikethrough,
   Underline,
   Undo,
-  Strikethrough,
-  ChevronDown,
 } from 'lucide-react';
 import React from 'react';
 
