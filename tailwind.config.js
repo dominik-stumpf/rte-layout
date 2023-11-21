@@ -17,8 +17,8 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        mono: 'Ubuntu Mono',
-        'sans-serif': 'Ubuntu',
+        mono: "'Ubuntu Mono', monospace",
+        'sans-serif': "'Ubuntu', sans-serif",
       },
       colors: {
         border: 'hsl(var(--border))',
