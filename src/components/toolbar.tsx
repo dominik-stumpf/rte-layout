@@ -11,6 +11,7 @@ import {
 
 import { Separator } from '@/components/ui/separator';
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
+import { TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import { cn } from '@/lib/utils';
 import { Tooltip } from '@radix-ui/react-tooltip';
 import {
@@ -32,7 +33,6 @@ import {
   Undo,
 } from 'lucide-react';
 import React from 'react';
-import { TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 
 interface DropdownDataItem {
   Icon: LucideIcon;
@@ -235,7 +235,7 @@ export function GenericActionButtonGroup({
       <Tooltip>
         <TooltipTrigger asChild>
           <ToggleGroupItem value={value} aria-label={tooltip} key={value}>
-          <Icon />
+            <Icon />
           </ToggleGroupItem>
         </TooltipTrigger>
         <TooltipContent>{tooltip}</TooltipContent>

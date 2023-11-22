@@ -1,5 +1,5 @@
-import { ThemeProvider } from '@/components/theme-provider';
 import { EditorShell } from '@/components/editor-shell';
+import { ThemeProvider } from '@/components/theme-provider';
 import { TooltipProvider } from '@/components/ui/tooltip';
 
 export default function App() {
