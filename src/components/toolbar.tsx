@@ -232,10 +232,18 @@ export function GenericActionButtonGroup({
 }: GenericActionButtonGroupProps) {
   return actionButtonProps.map(({ Icon, tooltip, value }) => {
     return (
-      <ToggleGroupItem value={value} aria-label={tooltip} key={value} className={cn(buttonVariants({variant: 'ghost', size: 'icon'}), 'relative')}>
+      <ToggleGroupItem
+        value={value}
+        aria-label={tooltip}
+        key={value}
+        className={cn(
+          buttonVariants({ variant: 'ghost', size: 'icon' }),
+          'relative',
+        )}
+      >
         <Tooltip>
           <TooltipTrigger className="absolute inset-0" asChild>
-          <span/>
+            <span />
           </TooltipTrigger>
           <TooltipContent>{tooltip}</TooltipContent>
         </Tooltip>
