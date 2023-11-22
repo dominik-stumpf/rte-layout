@@ -153,13 +153,20 @@ export function TextAlignment() {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger
-        className={cn(buttonVariants({ variant: 'ghost', size: 'icon' }))}
-      >
-        <AlignLeft />
-      </DropdownMenuTrigger>
+
+        <Tooltip>
+          <TooltipTrigger asChild>
+
+        <DropdownMenuTrigger
+          className={cn(buttonVariants({ variant: 'ghost', size: 'icon' }))}
+        >
+          <AlignLeft />
+        </DropdownMenuTrigger>
+          </TooltipTrigger>
+          <TooltipContent>Align text</TooltipContent>
+        </Tooltip>
       <DropdownMenuContent>
-        <DropdownMenuLabel>Text alignment</DropdownMenuLabel>
+          <DropdownMenuLabel>Text alignment</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuRadioGroup
           value={position}
@@ -236,10 +243,7 @@ export function GenericActionButtonGroup({
         value={value}
         aria-label={tooltip}
         key={value}
-        className={cn(
-          buttonVariants({ variant: 'ghost', size: 'icon' }),
-          'relative',
-        )}
+        className={cn('relative')}
       >
         <Tooltip>
           <TooltipTrigger className="absolute inset-0" asChild>
@@ -252,3 +256,4 @@ export function GenericActionButtonGroup({
     );
   });
 }
+
