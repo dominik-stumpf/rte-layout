@@ -1,4 +1,4 @@
-# rte-toolbar
+# 📜 rte-toolbar
 
 ## Header 
 
