@@ -4,9 +4,10 @@
 
 This piece of code is a dedicated a11y-compliant rich text editor layout design.
 
-## Toolbar actions
+## Toolbar actions breakdown
 
-> **Warning** Please refer to source code for the up-to-date structure, this is only meant to be an example.
+> [!WARNING]
+> Please refer to source code for the up-to-date structure, this is only meant to be an example.
 
 The actions are in groups where each bullet is repesenting a button or an entry in a dropdown menu.
 
@@ -47,7 +48,7 @@ The actions are in groups where each bullet is repesenting a button or an entry 
 
 Insert any embeddable element like an `iframe` or `svg`
 
-** Commonmark insertions **
+**Commonmark insertions**
 
 - Code block, insert
 - Link, insert - `[text](href)`
@@ -58,7 +59,7 @@ Insert any embeddable element like an `iframe` or `svg`
 - Image, insert - `![text](href)`
 - Table, insert
 
-** Miscellaneous insertions **
+**Miscellaneous insertions**
 
 - Gif, insert
 - Image, insert
