@@ -42,7 +42,7 @@ The actions are in groups where each bullet is repesenting a button or an entry 
 - Copy formatting/style, action
 - Paste formatting/style, action
 - Remove formatting/style, action
-- Heading level, action - preferably a dropdown representing the semantic element on the text using: `h1...h6`, `p`
+- Heading level, action - preferably a dropdown representing the semantic element on the text using: `h1` - `h6`, `p`
 
 ### Insert
 
