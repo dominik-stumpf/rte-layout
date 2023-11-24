@@ -7,12 +7,12 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 
+import { History } from '@/components/toolbar-actions/history';
+import { TextAlignment } from '@/components/toolbar-actions/text-alignment';
+import { TextFormat } from '@/components/toolbar-actions/text-format';
 import { Separator } from '@/components/ui/separator';
 import { cn } from '@/lib/utils';
 import { ChevronDown } from 'lucide-react';
-import { History } from '@/components/toolbar-actions/history';
-import { TextFormat } from '@/components/toolbar-actions/text-format';
-import { TextAlignment } from '@/components/toolbar-actions/text-alignment';
 
 export function Toolbar() {
   return (

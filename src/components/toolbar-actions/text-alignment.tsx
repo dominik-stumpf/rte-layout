@@ -1,4 +1,4 @@
-import React from 'react';
+import { buttonVariants } from '@/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -8,14 +8,14 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { AlignCenter, AlignJustify, AlignLeft, AlignRight } from 'lucide-react';
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
 import { cn } from '@/lib/utils';
-import { buttonVariants } from '@/components/ui/button';
+import { AlignCenter, AlignJustify, AlignLeft, AlignRight } from 'lucide-react';
+import React from 'react';
 
 export function TextAlignment() {
   const [position, setPosition] = React.useState(
@@ -58,7 +58,9 @@ const alignDropdownData = [
   { Icon: AlignJustify, actionName: 'justify' },
 ];
 
-function CustomDropdownRadioItem({ dataItem }: { dataItem: (typeof alignDropdownData)[number] }) {
+function CustomDropdownRadioItem({
+  dataItem,
+}: { dataItem: typeof alignDropdownData[number] }) {
   return (
     <DropdownMenuRadioItem
       value={dataItem.actionName}
