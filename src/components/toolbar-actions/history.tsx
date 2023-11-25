@@ -14,7 +14,12 @@ export function History() {
     <>
       <Tooltip>
         <TooltipTrigger asChild>
-          <Button size="icon" variant="ghost" onClick={history.undo.onClick} disabled={history.undo.disabled}>
+          <Button
+            size="icon"
+            variant="ghost"
+            onClick={history.undo.onClick}
+            disabled={history.undo.disabled}
+          >
             <Undo />
           </Button>
         </TooltipTrigger>
@@ -22,7 +27,12 @@ export function History() {
       </Tooltip>
       <Tooltip>
         <TooltipTrigger asChild>
-          <Button size="icon" variant="ghost" onClick={history.redo.onClick} disabled={history.redo.disabled}>
+          <Button
+            size="icon"
+            variant="ghost"
+            onClick={history.redo.onClick}
+            disabled={history.redo.disabled}
+          >
             <Redo />
           </Button>
         </TooltipTrigger>
