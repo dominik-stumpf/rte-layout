@@ -1,0 +1,56 @@
+import { Button } from '@/components/ui/button';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from '@/components/ui/tooltip';
+import { Redo, Undo } from 'lucide-react';
+import { StateCreator, create } from 'zustand'
+import { produce } from 'immer';
+
+interface State {
+  history: {
+    undo: {
+      onClick: () => void,
+      disabled: boolean,
+    },
+    redo: {
+      onClick: () => void,
+      disabled: boolean,
+    }
+  }
+}
+
+const useBearStore = create<State>()((set) => ({
+  // bears: 0,
+  // increase: (by) => set((state) => ({ bears: state.bears + by })),
+  history: {
+    undo: {
+      // onClick: () => { console.log('undo action') },
+      // onClick: () => set((state) => state),
+      onClick: () => set(produce((state: State) => { !state.history.undo.disabled })),
+      disabled: false,
+    },
+    redo: {
+      onClick: () => { console.log('redo action') },
+      disabled: false,
+    }
+  }
+}))
+
+export function History() {
+  const history = useBearStore((state) => state.history);
+
+  return (
+    <>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <Button size="icon" variant="ghost" onClick={history.undo.onClick} disabled={history.undo.disabled}>
+            <Undo />
+          </Button>
+        </TooltipTrigger>
+        <TooltipContent>Undo last action</TooltipContent>
+      </Tooltip>
+    </>
+  );
+}

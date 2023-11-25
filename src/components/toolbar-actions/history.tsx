@@ -5,13 +5,16 @@ import {
   TooltipTrigger,
 } from '@/components/ui/tooltip';
 import { Redo, Undo } from 'lucide-react';
+import { useToolbarStore } from '../use-toolbar-store';
 
 export function History() {
+  const history = useToolbarStore((state) => state.history);
+
   return (
     <>
       <Tooltip>
         <TooltipTrigger asChild>
-          <Button size="icon" variant="ghost">
+          <Button size="icon" variant="ghost" onClick={history.undo.onClick} disabled={history.undo.disabled}>
             <Undo />
           </Button>
         </TooltipTrigger>
@@ -19,11 +22,11 @@ export function History() {
       </Tooltip>
       <Tooltip>
         <TooltipTrigger asChild>
-          <Button size="icon" variant="ghost" disabled>
+          <Button size="icon" variant="ghost" onClick={history.redo.onClick} disabled={history.redo.disabled}>
             <Redo />
           </Button>
         </TooltipTrigger>
-        <TooltipContent>Redo last action</TooltipContent>
+        <TooltipContent>Undo last action</TooltipContent>
       </Tooltip>
     </>
   );
