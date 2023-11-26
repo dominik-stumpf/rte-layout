@@ -2,10 +2,8 @@ import { buttonVariants } from '@/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuLabel,
   DropdownMenuRadioGroup,
   DropdownMenuRadioItem,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import {
@@ -14,13 +12,32 @@ import {
   TooltipTrigger,
 } from '@/components/ui/tooltip';
 import { cn } from '@/lib/utils';
-import { AlignCenter, AlignJustify, AlignLeft, AlignRight } from 'lucide-react';
-import React from 'react';
+import {
+  AlignCenter,
+  AlignJustify,
+  AlignLeft,
+  AlignRight,
+  LucideIcon,
+} from 'lucide-react';
+import { useToolbarStore } from '../use-toolbar-store';
+
+interface TextAlignmentData {
+  Icon: LucideIcon;
+  value: string;
+}
+
+const textAlignmentData: TextAlignmentData[] = [
+  { Icon: AlignLeft, value: 'left' },
+  { Icon: AlignRight, value: 'right' },
+  { Icon: AlignCenter, value: 'center' },
+  { Icon: AlignJustify, value: 'justify' },
+];
 
 export function TextAlignment() {
-  const [position, setPosition] = React.useState(
-    alignDropdownData.find((data) => data.defaultChecked)?.actionName,
-  );
+  const textAlignment = useToolbarStore((state) => state.textAlignment);
+  const ActiveIcon = textAlignmentData.find(
+    ({ value }) => value === textAlignment.value,
+  )?.Icon;
 
   return (
     <DropdownMenu>
@@ -29,45 +46,25 @@ export function TextAlignment() {
           <DropdownMenuTrigger
             className={cn(buttonVariants({ variant: 'ghost', size: 'icon' }))}
           >
-            <AlignLeft />
+            {ActiveIcon ? <ActiveIcon /> : <AlignLeft />}
           </DropdownMenuTrigger>
         </TooltipTrigger>
         <TooltipContent>Align text</TooltipContent>
       </Tooltip>
       <DropdownMenuContent>
-        <DropdownMenuLabel>Text alignment</DropdownMenuLabel>
-        <DropdownMenuSeparator />
-        <DropdownMenuRadioGroup
-          value={position}
-          onValueChange={setPosition}
-          aria-label="Text alignment"
-        >
-          {alignDropdownData.map((data) => (
-            <CustomDropdownRadioItem dataItem={data} key={data.actionName} />
+        <DropdownMenuRadioGroup aria-label="Text alignment" {...textAlignment}>
+          {textAlignmentData.map(({ Icon, value }) => (
+            <DropdownMenuRadioItem
+              key={value}
+              value={value}
+              className="space-x-2 capitalize"
+            >
+              <Icon />
+              <span>{value}</span>
+            </DropdownMenuRadioItem>
           ))}
         </DropdownMenuRadioGroup>
       </DropdownMenuContent>
     </DropdownMenu>
-  );
-}
-
-const alignDropdownData = [
-  { Icon: AlignLeft, actionName: 'left', defaultChecked: true },
-  { Icon: AlignRight, actionName: 'right' },
-  { Icon: AlignCenter, actionName: 'center' },
-  { Icon: AlignJustify, actionName: 'justify' },
-];
-
-function CustomDropdownRadioItem({
-  dataItem,
-}: { dataItem: typeof alignDropdownData[number] }) {
-  return (
-    <DropdownMenuRadioItem
-      value={dataItem.actionName}
-      className="space-x-2 capitalize"
-    >
-      <dataItem.Icon />
-      <span>{dataItem.actionName}</span>
-    </DropdownMenuRadioItem>
   );
 }
