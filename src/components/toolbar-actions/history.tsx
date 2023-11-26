@@ -1,4 +1,5 @@
 import { Button } from '@/components/ui/button';
+import { Kbd } from '@/components/ui/kbd';
 import {
   Tooltip,
   TooltipContent,
@@ -8,7 +9,7 @@ import { Redo, Undo } from 'lucide-react';
 import { useToolbarStore } from '../use-toolbar-store';
 
 export function History() {
-  const history = useToolbarStore((state) => state.history);
+  const { undo, redo } = useToolbarStore((state) => state.history);
 
   return (
     <>
@@ -17,26 +18,32 @@ export function History() {
           <Button
             size="icon"
             variant="ghost"
-            onClick={history.undo.onClick}
-            disabled={history.undo.disabled}
+            onClick={undo.onClick}
+            disabled={undo.disabled}
           >
             <Undo />
           </Button>
         </TooltipTrigger>
-        <TooltipContent>Undo last action</TooltipContent>
+        <TooltipContent className="space-x-2">
+          <span>Undo last action</span>
+          {undo.shortcut && <Kbd>{undo.shortcut}</Kbd>}
+        </TooltipContent>
       </Tooltip>
       <Tooltip>
         <TooltipTrigger asChild>
           <Button
             size="icon"
             variant="ghost"
-            onClick={history.redo.onClick}
-            disabled={history.redo.disabled}
+            onClick={redo.onClick}
+            disabled={redo.disabled}
           >
             <Redo />
           </Button>
         </TooltipTrigger>
-        <TooltipContent>Undo last action</TooltipContent>
+        <TooltipContent className="space-x-2">
+          <span>Redo last action</span>
+          {redo.shortcut && <Kbd>{redo.shortcut}</Kbd>}
+        </TooltipContent>
       </Tooltip>
     </>
   );

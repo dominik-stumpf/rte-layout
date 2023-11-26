@@ -1,4 +1,5 @@
-import { Toggle } from '@/components/ui/toggle';
+import { Kbd } from '@/components/ui/kbd';
+import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 import {
   Tooltip,
   TooltipContent,
@@ -7,56 +8,63 @@ import {
 import {
   Bold,
   Italic,
+  LucideIcon,
   Strikethrough,
   Subscript,
   Superscript,
   Underline,
 } from 'lucide-react';
+import { FormatType, useToolbarStore } from '../use-toolbar-store';
 
-const formatActions = [
-  { value: 'bold', tooltip: 'Toggle bold', Icon: Bold, shortcut: 'Ctrl+B' },
+interface FormatActions {
+  value: FormatType;
+  Icon: LucideIcon;
+  shortcut?: string;
+}
+
+const formatActions: FormatActions[] = [
+  { value: 'bold', Icon: Bold },
   {
     value: 'italic',
-    tooltip: 'Toggle italic',
     Icon: Italic,
-    shortcut: 'Ctrl+I',
   },
   {
     value: 'underline',
-    tooltip: 'Toggle underline',
     Icon: Underline,
-    shortcut: 'Ctrl+U',
   },
   {
     value: 'strikethrough',
-    tooltip: 'Toggle strikethrough',
     Icon: Strikethrough,
-    shortcut: 'Ctrl+S',
   },
-  { value: 'subscript', tooltip: 'Toggle subscript', Icon: Subscript },
-  { value: 'superscript', tooltip: 'Toggle superscript', Icon: Superscript },
+  { value: 'subscript', Icon: Subscript },
+  { value: 'superscript', Icon: Superscript },
 ];
 
 export function TextFormat() {
-  return formatActions.map(({ value, tooltip, Icon, shortcut }) => (
-    <Tooltip key={value}>
-      <TooltipTrigger tabIndex={-1} asChild>
-        <span>
-          <Toggle aria-label={tooltip}>
-            <Icon />
-          </Toggle>
-        </span>
-      </TooltipTrigger>
-      <TooltipContent className="space-x-2">
-        <span>{tooltip}</span>
-        {shortcut && <Kbd>{shortcut}</Kbd>}
-      </TooltipContent>
-    </Tooltip>
-  ));
-}
+  const textFormat = useToolbarStore((state) => state.textFormat);
+  const filledFormatActions = formatActions.map(({ value, ...rest }) => ({
+    ...rest,
+    value,
+    shortcut: textFormat.shortcut?.[value],
+  }));
 
-export function Kbd({ children }: { children: string }) {
   return (
-    <kbd className="text-muted-foreground font-mono capitalize">{children}</kbd>
+    <ToggleGroup type="multiple" {...textFormat}>
+      {filledFormatActions.map(({ value, Icon, shortcut }) => (
+        <Tooltip key={value}>
+          <TooltipTrigger tabIndex={-1} asChild>
+            <span>
+              <ToggleGroupItem aria-label={`Toggle ${value}`} value={value}>
+                <Icon />
+              </ToggleGroupItem>
+            </span>
+          </TooltipTrigger>
+          <TooltipContent className="space-x-2">
+            <span>Toggle {value}</span>
+            {shortcut && <Kbd>{shortcut}</Kbd>}
+          </TooltipContent>
+        </Tooltip>
+      ))}
+    </ToggleGroup>
   );
 }
