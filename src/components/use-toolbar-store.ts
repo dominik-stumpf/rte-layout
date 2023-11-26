@@ -45,7 +45,6 @@ export interface ToolbarState {
 export const useToolbarStore = create<ToolbarState>()((set) => ({
   history: {
     undo: {
-      // onClick: () => set(produce((state: State) => { state.history.undo.disabled = !state.history.undo.disabled })),
       onClick: () => {
         console.log('undo button');
       },
