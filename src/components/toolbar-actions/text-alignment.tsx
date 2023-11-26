@@ -11,6 +11,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
+import { useToolbarStore } from '@/hooks/use-toolbar-store';
 import { cn } from '@/lib/utils';
 import {
   AlignCenter,
@@ -19,7 +20,6 @@ import {
   AlignRight,
   LucideIcon,
 } from 'lucide-react';
-import { useToolbarStore } from '../use-toolbar-store';
 
 interface TextAlignmentData {
   Icon: LucideIcon;

@@ -5,8 +5,8 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
+import { useToolbarStore } from '@/hooks/use-toolbar-store';
 import { Redo, Undo } from 'lucide-react';
-import { useToolbarStore } from '../use-toolbar-store';
 
 export function History() {
   const { undo, redo } = useToolbarStore((state) => state.history);

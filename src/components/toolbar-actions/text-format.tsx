@@ -5,6 +5,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
+import { FormatType, useToolbarStore } from '@/hooks/use-toolbar-store';
 import {
   Bold,
   Italic,
@@ -14,7 +15,6 @@ import {
   Superscript,
   Underline,
 } from 'lucide-react';
-import { FormatType, useToolbarStore } from '../use-toolbar-store';
 
 interface FormatActions {
   value: FormatType;
