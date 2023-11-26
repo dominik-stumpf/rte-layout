@@ -1,18 +1,7 @@
-import { buttonVariants } from '@/components/ui/button';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuRadioGroup,
-  DropdownMenuRadioItem,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-
 import { History } from '@/components/toolbar-actions/history';
 import { TextAlignment } from '@/components/toolbar-actions/text-alignment';
 import { TextFormat } from '@/components/toolbar-actions/text-format';
 import { Separator } from '@/components/ui/separator';
-import { cn } from '@/lib/utils';
-import { ChevronDown } from 'lucide-react';
 
 export function Toolbar() {
   return (
@@ -22,58 +11,6 @@ export function Toolbar() {
       <TextFormat />
       <Separator orientation="vertical" />
       <TextAlignment />
-      <Separator orientation="vertical" />
-
-      <DropdownMenu>
-        <DropdownMenuTrigger
-          className={cn('space-x-2', buttonVariants({ variant: 'ghost' }))}
-        >
-          <span>Styles</span>
-          <ChevronDown />
-        </DropdownMenuTrigger>
-        <DropdownMenuContent>
-          <DropdownMenuRadioGroup aria-label="Text style">
-            <DropdownMenuRadioItem value="classy">Classy</DropdownMenuRadioItem>
-          </DropdownMenuRadioGroup>
-        </DropdownMenuContent>
-      </DropdownMenu>
-      <DropdownMenu>
-        <DropdownMenuTrigger
-          className={cn('space-x-2', buttonVariants({ variant: 'ghost' }))}
-        >
-          <span>Paragraph</span>
-          <ChevronDown />
-        </DropdownMenuTrigger>
-        <DropdownMenuContent>
-          <DropdownMenuRadioGroup aria-label="Text type">
-            <DropdownMenuRadioItem value="blockquote">
-              Blockquote
-            </DropdownMenuRadioItem>
-            <DropdownMenuRadioItem value="heading 1">
-              Heading 1
-            </DropdownMenuRadioItem>
-          </DropdownMenuRadioGroup>
-        </DropdownMenuContent>
-      </DropdownMenu>
-
-      <Separator orientation="vertical" />
-
-      <DropdownMenu>
-        <DropdownMenuTrigger
-          className={cn('space-x-2', buttonVariants({ variant: 'ghost' }))}
-        >
-          <span>Insert</span>
-          <ChevronDown />
-        </DropdownMenuTrigger>
-        <DropdownMenuContent>
-          <DropdownMenuRadioGroup aria-label="Insert new element">
-            <DropdownMenuRadioItem value="gif">gif</DropdownMenuRadioItem>
-            <DropdownMenuRadioItem value="youtube video">
-              youtube video
-            </DropdownMenuRadioItem>
-          </DropdownMenuRadioGroup>
-        </DropdownMenuContent>
-      </DropdownMenu>
     </div>
   );
 }
