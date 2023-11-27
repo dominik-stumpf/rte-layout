@@ -78,3 +78,14 @@
   }
 }
 
+.react-colorful .react-colorful__saturation {
+  @apply rounded-t-md;
+}
+
+.react-colorful .react-colorful__last-control {
+  @apply rounded-b-md;
+}
+
+.react-colorful *:focus .react-colorful__pointer {
+  @apply outline outline-ring outline-2 outline-offset-2;
+}

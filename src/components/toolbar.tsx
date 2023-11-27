@@ -1,6 +1,7 @@
 import { History } from '@/components/toolbar-actions/history';
 import { TextAlignment } from '@/components/toolbar-actions/text-alignment';
 import { TextFormat } from '@/components/toolbar-actions/text-format';
+import { TextStyle } from '@/components/toolbar-actions/text-style';
 import { Separator } from '@/components/ui/separator';
 
 export function Toolbar() {
@@ -11,6 +12,8 @@ export function Toolbar() {
       <TextFormat />
       <Separator orientation="vertical" />
       <TextAlignment />
+      <Separator orientation="vertical" />
+      <TextStyle />
     </div>
   );
 }

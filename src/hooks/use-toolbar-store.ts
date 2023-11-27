@@ -40,6 +40,16 @@ export interface ToolbarState {
   };
   textFormat: TextFormat;
   textAlignment: TextAlignment;
+  textStyle: {
+    fillBackground: {
+      color: string;
+      onChange: (color: string) => void;
+    };
+    fillForeground: {
+      color: string;
+      onChange: (color: string) => void;
+    };
+  };
 }
 
 export const useToolbarStore = create<ToolbarState>()((set) => ({
@@ -80,5 +90,31 @@ export const useToolbarStore = create<ToolbarState>()((set) => ({
       ); // example implementation
     },
     value: 'left', // default value
+  },
+  textStyle: {
+    fillBackground: {
+      color: '#123456',
+      onChange: (color: string) => {
+        console.log(color);
+
+        set(
+          produce((state: ToolbarState) => {
+            state.textStyle.fillBackground.color = color;
+          }),
+        );
+      },
+    },
+    fillForeground: {
+      color: '#654321',
+      onChange: (color: string) => {
+        console.log(color);
+
+        set(
+          produce((state: ToolbarState) => {
+            state.textStyle.fillForeground.color = color;
+          }),
+        );
+      },
+    },
   },
 }));
