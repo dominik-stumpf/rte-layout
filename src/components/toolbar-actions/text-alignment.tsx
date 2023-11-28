@@ -6,12 +6,13 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { Kbd } from '@/components/ui/kbd';
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
-import { useToolbarStore } from '@/hooks/use-toolbar-store';
+import { AlignType, useToolbarStore } from '@/hooks/use-toolbar-store';
 import { cn } from '@/lib/utils';
 import {
   AlignCenter,
@@ -45,14 +46,24 @@ export function TextAlignment() {
         <TooltipTrigger asChild>
           <DropdownMenuTrigger
             className={cn(buttonVariants({ variant: 'ghost', size: 'icon' }))}
+            disabled={textAlignment.disabled}
           >
             {ActiveIcon ? <ActiveIcon /> : <AlignLeft />}
           </DropdownMenuTrigger>
         </TooltipTrigger>
-        <TooltipContent>Align text</TooltipContent>
+        <TooltipContent className={'space-x-2'}>
+          <span>Align text</span>
+          {textAlignment.shortcut && <Kbd>{textAlignment.shortcut}</Kbd>}
+        </TooltipContent>
       </Tooltip>
       <DropdownMenuContent>
-        <DropdownMenuRadioGroup aria-label="Text alignment" {...textAlignment}>
+        <DropdownMenuRadioGroup
+          aria-label="Text alignment"
+          onValueChange={(value) =>
+            textAlignment.onValueChange(value as AlignType)
+          }
+          value={textAlignment.value}
+        >
           {textAlignmentData.map(({ Icon, value }) => (
             <DropdownMenuRadioItem
               key={value}

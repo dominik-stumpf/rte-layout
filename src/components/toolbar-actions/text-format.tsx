@@ -5,7 +5,11 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
-import { FormatType, useToolbarStore } from '@/hooks/use-toolbar-store';
+import {
+  FormatType,
+  ToolbarState,
+  useToolbarStore,
+} from '@/hooks/use-toolbar-store';
 import {
   Bold,
   Italic,
@@ -16,13 +20,12 @@ import {
   Underline,
 } from 'lucide-react';
 
-interface FormatActions {
+interface IconMap {
   value: FormatType;
   Icon: LucideIcon;
-  shortcut?: string;
 }
 
-const formatActions: FormatActions[] = [
+const iconMap: IconMap[] = [
   { value: 'bold', Icon: Bold },
   {
     value: 'italic',
@@ -42,29 +45,47 @@ const formatActions: FormatActions[] = [
 
 export function TextFormat() {
   const textFormat = useToolbarStore((state) => state.textFormat);
-  const filledFormatActions = formatActions.map(({ value, ...rest }) => ({
-    ...rest,
-    value,
-    shortcut: textFormat.shortcut?.[value],
-  }));
 
   return (
     <ToggleGroup type="multiple" {...textFormat}>
-      {filledFormatActions.map(({ value, Icon, shortcut }) => (
-        <Tooltip key={value}>
-          <TooltipTrigger tabIndex={-1} asChild>
-            <span>
-              <ToggleGroupItem aria-label={`Toggle ${value}`} value={value}>
-                <Icon />
-              </ToggleGroupItem>
-            </span>
-          </TooltipTrigger>
-          <TooltipContent className="space-x-2">
-            <span>Toggle {value}</span>
-            {shortcut && <Kbd>{shortcut}</Kbd>}
-          </TooltipContent>
-        </Tooltip>
+      {textFormat.toggles.map((toggleData) => (
+        <TextFormatToggle toggleData={toggleData} />
       ))}
     </ToggleGroup>
+  );
+}
+
+interface TextFormatProps {
+  toggleData: ToolbarState['textFormat']['toggles'][0];
+}
+
+function TextFormatToggle({ toggleData }: TextFormatProps) {
+  const { value, disabled, shortcut } = toggleData;
+  const iconMapItem = iconMap.find((action) => action.value === value);
+
+  if (!iconMapItem) {
+    return;
+  }
+
+  const { Icon } = iconMapItem;
+
+  return (
+    <Tooltip key={value}>
+      <TooltipTrigger tabIndex={-1} asChild>
+        <span>
+          <ToggleGroupItem
+            aria-label={`Toggle ${value}`}
+            value={value}
+            disabled={disabled}
+          >
+            <Icon />
+          </ToggleGroupItem>
+        </span>
+      </TooltipTrigger>
+      <TooltipContent className="space-x-2">
+        <span>Toggle {value}</span>
+        {shortcut && <Kbd>{shortcut}</Kbd>}
+      </TooltipContent>
+    </Tooltip>
   );
 }

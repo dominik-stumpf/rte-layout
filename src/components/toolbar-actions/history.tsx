@@ -13,38 +13,42 @@ export function History() {
 
   return (
     <>
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <Button
-            size="icon"
-            variant="ghost"
-            onClick={undo.onClick}
-            disabled={undo.disabled}
-          >
-            <Undo />
-          </Button>
-        </TooltipTrigger>
-        <TooltipContent className="space-x-2">
-          <span>Undo last action</span>
-          {undo.shortcut && <Kbd>{undo.shortcut}</Kbd>}
-        </TooltipContent>
-      </Tooltip>
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <Button
-            size="icon"
-            variant="ghost"
-            onClick={redo.onClick}
-            disabled={redo.disabled}
-          >
-            <Redo />
-          </Button>
-        </TooltipTrigger>
-        <TooltipContent className="space-x-2">
-          <span>Redo last action</span>
-          {redo.shortcut && <Kbd>{redo.shortcut}</Kbd>}
-        </TooltipContent>
-      </Tooltip>
+      {undo && (
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button
+              size="icon"
+              variant="ghost"
+              onClick={undo.onClick}
+              disabled={undo.disabled}
+            >
+              <Undo />
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent className="space-x-2">
+            <span>Undo last action</span>
+            {undo.shortcut && <Kbd>{undo.shortcut}</Kbd>}
+          </TooltipContent>
+        </Tooltip>
+      )}
+      {redo && (
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button
+              size="icon"
+              variant="ghost"
+              onClick={redo.onClick}
+              disabled={redo.disabled}
+            >
+              <Redo />
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent className="space-x-2">
+            <span>Redo last action</span>
+            {redo.shortcut && <Kbd>{redo.shortcut}</Kbd>}
+          </TooltipContent>
+        </Tooltip>
+      )}
     </>
   );
 }

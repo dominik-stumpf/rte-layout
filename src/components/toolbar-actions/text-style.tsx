@@ -1,5 +1,6 @@
 import { buttonVariants } from '@/components/ui/button';
 import { inputVariants } from '@/components/ui/input';
+import { Kbd } from '@/components/ui/kbd';
 import {
   Popover,
   PopoverContent,
@@ -22,57 +23,71 @@ export function TextStyle() {
 
   return (
     <>
-      <Popover>
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <PopoverTrigger
-              className={buttonVariants({ variant: 'ghost', size: 'icon' })}
-            >
-              <PaintBucket />
-            </PopoverTrigger>
-          </TooltipTrigger>
-          <TooltipContent>Fill background</TooltipContent>
-        </Tooltip>
-        <PopoverContent className="overflow-visible space-y-2 p-2 w-min">
-          <HexColorInput
-            prefixed
-            alpha
-            color={fillBackground.color}
-            onChange={fillBackground.onChange}
-            className={inputVariants({ className: 'font-mono uppercase' })}
-          />
-          <HexAlphaColorPicker
-            color={fillBackground.color}
-            onChange={fillBackground.onChange}
-          />
-        </PopoverContent>
-      </Popover>
+      {fillBackground && (
+        <Popover>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <PopoverTrigger
+                className={buttonVariants({ variant: 'ghost', size: 'icon' })}
+                disabled={fillBackground.disabled}
+              >
+                <PaintBucket />
+              </PopoverTrigger>
+            </TooltipTrigger>
+            <TooltipContent className={'space-x-2'}>
+              <span>Fill background</span>
+              {fillBackground.shortcut && <Kbd>{fillBackground.shortcut}</Kbd>}
+            </TooltipContent>
+          </Tooltip>
+          <PopoverContent className="overflow-visible space-y-2 p-2 w-min">
+            <HexColorInput
+              prefixed
+              alpha
+              color={fillBackground.color}
+              onChange={fillBackground.onChange}
+              className={inputVariants({ className: 'font-mono uppercase' })}
+            />
+            <HexAlphaColorPicker
+              color={fillBackground.color}
+              onChange={fillBackground.onChange}
+            />
+          </PopoverContent>
+        </Popover>
+      )}
 
-      <Popover>
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <PopoverTrigger
-              className={cn(buttonVariants({ variant: 'ghost', size: 'icon' }))}
-            >
-              <Baseline />
-            </PopoverTrigger>
-          </TooltipTrigger>
-          <TooltipContent>Fill foreground</TooltipContent>
-        </Tooltip>
-        <PopoverContent className="overflow-visible space-y-2 p-2 w-min">
-          <HexColorInput
-            prefixed
-            alpha
-            color={fillForeground.color}
-            onChange={fillForeground.onChange}
-            className={inputVariants({ className: 'font-mono uppercase' })}
-          />
-          <HexAlphaColorPicker
-            color={fillForeground.color}
-            onChange={fillForeground.onChange}
-          />
-        </PopoverContent>
-      </Popover>
+      {fillForeground && (
+        <Popover>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <PopoverTrigger
+                className={cn(
+                  buttonVariants({ variant: 'ghost', size: 'icon' }),
+                )}
+                disabled={fillForeground.disabled}
+              >
+                <Baseline />
+              </PopoverTrigger>
+            </TooltipTrigger>
+            <TooltipContent className={'space-x-2'}>
+              <span>Fill foreground</span>
+              {fillForeground.shortcut && <Kbd>{fillForeground.shortcut}</Kbd>}
+            </TooltipContent>
+          </Tooltip>
+          <PopoverContent className="overflow-visible space-y-2 p-2 w-min">
+            <HexColorInput
+              prefixed
+              alpha
+              color={fillForeground.color}
+              onChange={fillForeground.onChange}
+              className={inputVariants({ className: 'font-mono uppercase' })}
+            />
+            <HexAlphaColorPicker
+              color={fillForeground.color}
+              onChange={fillForeground.onChange}
+            />
+          </PopoverContent>
+        </Popover>
+      )}
     </>
   );
 }

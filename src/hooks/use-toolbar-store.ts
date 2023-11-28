@@ -1,12 +1,12 @@
-import { DropdownMenuRadioGroupProps } from '@radix-ui/react-dropdown-menu';
-import type { ToggleGroupMultipleProps } from '@radix-ui/react-toggle-group';
 import { produce } from 'immer';
 import { create } from 'zustand';
 
-interface Button {
-  onClick: () => void;
-  disabled: boolean;
+interface GenericAction {
+  disabled?: boolean;
   shortcut?: string;
+}
+interface Button extends GenericAction {
+  onClick: () => void;
 }
 
 export type FormatType =
@@ -17,38 +17,38 @@ export type FormatType =
   | 'superscript'
   | 'subscript';
 
-interface TextFormat
-  extends Pick<
-    ToggleGroupMultipleProps,
-    'value' | 'disabled' | 'onValueChange' | 'defaultValue'
-  > {
+interface TextFormatToggle extends GenericAction {
+  value: FormatType;
+}
+
+interface TextFormat {
+  onValueChange?: (value: FormatType[]) => void;
   value?: FormatType[];
-  shortcut?: Partial<Record<FormatType, string>>;
+  toggles: TextFormatToggle[];
 }
 
 export type AlignType = 'left' | 'right' | 'center' | 'justify';
 
-interface TextAlignment
-  extends Pick<DropdownMenuRadioGroupProps, 'value' | 'onValueChange'> {
+interface TextAlignment extends GenericAction {
+  onValueChange: (value: AlignType) => void;
   value?: AlignType;
+}
+
+interface FillColor extends GenericAction {
+  color: string;
+  onChange: (color: string) => void;
 }
 
 export interface ToolbarState {
   history: {
-    undo: Button;
-    redo: Button;
+    undo?: Button;
+    redo?: Button;
   };
   textFormat: TextFormat;
   textAlignment: TextAlignment;
   textStyle: {
-    fillBackground: {
-      color: string;
-      onChange: (color: string) => void;
-    };
-    fillForeground: {
-      color: string;
-      onChange: (color: string) => void;
-    };
+    fillBackground?: FillColor;
+    fillForeground?: FillColor;
   };
 }
 
@@ -58,14 +58,12 @@ export const useToolbarStore = create<ToolbarState>()((set) => ({
       onClick: () => {
         console.log('undo button');
       },
-      disabled: false,
       shortcut: 'Ctrl+Z',
     },
     redo: {
       onClick: () => {
         console.log('redo button');
       },
-      disabled: false,
       shortcut: 'Ctrl+Y',
     },
   },
@@ -73,12 +71,14 @@ export const useToolbarStore = create<ToolbarState>()((set) => ({
     onValueChange: (value) => {
       console.log(value);
     },
-    shortcut: {
-      bold: 'Ctrl+B',
-      italic: 'Ctrl+I',
-      underline: 'Ctrl+U',
-      strikethrough: 'Crtl+S',
-    },
+    toggles: [
+      { value: 'bold', shortcut: 'Ctrl+B' },
+      { value: 'italic', shortcut: 'Ctrl+I' },
+      { value: 'underline', shortcut: 'Ctrl+U' },
+      { value: 'strikethrough' },
+      { value: 'superscript' },
+      { value: 'subscript' },
+    ],
   },
   textAlignment: {
     onValueChange: (value) => {
@@ -87,30 +87,36 @@ export const useToolbarStore = create<ToolbarState>()((set) => ({
         produce((state: ToolbarState) => {
           state.textAlignment.value = value as AlignType;
         }),
-      ); // example implementation
+      );
     },
     value: 'left', // default value
   },
   textStyle: {
     fillBackground: {
+      shortcut: 'Ctrl+Shift+B',
       color: '#123456',
       onChange: (color: string) => {
         console.log(color);
-
         set(
           produce((state: ToolbarState) => {
+            if (state.textStyle.fillBackground === undefined) {
+              return;
+            }
             state.textStyle.fillBackground.color = color;
           }),
         );
       },
     },
     fillForeground: {
+      shortcut: 'Ctrl+Shift+F',
       color: '#654321',
       onChange: (color: string) => {
         console.log(color);
-
         set(
           produce((state: ToolbarState) => {
+            if (state.textStyle.fillForeground === undefined) {
+              return;
+            }
             state.textStyle.fillForeground.color = color;
           }),
         );
