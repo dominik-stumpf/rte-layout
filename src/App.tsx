@@ -6,7 +6,7 @@ export default function App() {
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
       <TooltipProvider>
-        <div className="w-screen min-h-screen grid place-items-center p-4 antialiased">
+        <div className="grid min-h-screen w-screen place-items-center p-4 antialiased">
           <EditorShell />
         </div>
       </TooltipProvider>

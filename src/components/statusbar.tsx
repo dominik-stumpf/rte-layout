@@ -3,7 +3,7 @@ export function Statusbar() {
   const characters = 238;
 
   return (
-    <div className="border border-t-2 text-right text-card-foreground bg-card px-4 py-2">
+    <div className="border border-t-2 bg-card px-4 py-2 text-right text-card-foreground">
       Words: {words} Characters: {characters}
     </div>
   );

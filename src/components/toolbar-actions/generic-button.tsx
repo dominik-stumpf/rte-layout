@@ -12,7 +12,11 @@ export function GenericButton({
   button,
   tooltip,
   Icon,
-}: { button?: ButtonType; tooltip: string; Icon: LucideIcon }) {
+}: {
+  button?: ButtonType;
+  tooltip: string;
+  Icon: LucideIcon;
+}) {
   if (!button) {
     return;
   }

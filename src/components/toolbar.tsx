@@ -6,7 +6,7 @@ import { Separator } from '@/components/ui/separator';
 
 export function Toolbar() {
   return (
-    <div className="border border-b-2 px-1 py-1 flex gap-2 bg-card text-card-foreground overflow-auto">
+    <div className="flex gap-2 overflow-auto border border-b-2 bg-card px-1 py-1 text-card-foreground">
       <History />
       <Separator orientation="vertical" />
       <TextFormat />

@@ -4,7 +4,7 @@ import { Toolbar } from './toolbar';
 
 export function EditorShell() {
   return (
-    <main className="border max-w-[100ch] w-full h-full max-h-[42rem] flex flex-col font-sans-serif min-w-0">
+    <main className="flex h-full max-h-[42rem] w-full min-w-0 max-w-[100ch] flex-col border font-sans-serif">
       <Toolbar />
       <Editor />
       <Statusbar />

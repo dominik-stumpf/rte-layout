@@ -1,5 +1,4 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-bun prettier -c "src/**/*.{tsx,ts,css}"
 bun biome ci .

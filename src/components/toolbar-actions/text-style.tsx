@@ -50,7 +50,7 @@ export function TextStyle() {
               {fillBackground.shortcut && <Kbd>{fillBackground.shortcut}</Kbd>}
             </TooltipContent>
           </Tooltip>
-          <PopoverContent className="overflow-visible space-y-2 p-2 w-min">
+          <PopoverContent className="w-min space-y-2 overflow-visible p-2">
             <HexColorInput
               prefixed
               alpha
@@ -84,7 +84,7 @@ export function TextStyle() {
               {fillForeground.shortcut && <Kbd>{fillForeground.shortcut}</Kbd>}
             </TooltipContent>
           </Tooltip>
-          <PopoverContent className="overflow-visible space-y-2 p-2 w-min">
+          <PopoverContent className="w-min space-y-2 overflow-visible p-2">
             <HexColorInput
               prefixed
               alpha

@@ -71,10 +71,10 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground font-sans-serif;
+    @apply bg-background font-sans-serif text-foreground;
   }
   svg {
-    @apply w-4 h-4;
+    @apply h-4 w-4;
   }
 }
 
@@ -87,5 +87,5 @@
 }
 
 .react-colorful *:focus .react-colorful__pointer {
-  @apply outline outline-ring outline-2 outline-offset-2;
+  @apply outline outline-2 outline-offset-2 outline-ring;
 }
