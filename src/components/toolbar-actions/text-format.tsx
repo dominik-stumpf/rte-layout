@@ -49,7 +49,7 @@ export function TextFormat() {
   return (
     <ToggleGroup type="multiple" {...textFormat}>
       {textFormat.toggles.map((toggleData) => (
-        <TextFormatToggle toggleData={toggleData} />
+        <TextFormatToggle toggleData={toggleData} key={toggleData.value} />
       ))}
     </ToggleGroup>
   );

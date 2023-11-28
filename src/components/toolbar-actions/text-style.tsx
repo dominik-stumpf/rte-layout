@@ -13,13 +13,24 @@ import {
 } from '@/components/ui/tooltip';
 import { useToolbarStore } from '@/hooks/use-toolbar-store';
 import { cn } from '@/lib/utils';
-import { Baseline, PaintBucket } from 'lucide-react';
+import {
+  Baseline,
+  ClipboardCopy,
+  ClipboardPaste,
+  Eraser,
+  PaintBucket,
+} from 'lucide-react';
 import { HexAlphaColorPicker, HexColorInput } from 'react-colorful';
+import { GenericButton } from './generic-button';
 
 export function TextStyle() {
-  const { fillBackground, fillForeground } = useToolbarStore(
-    (state) => state.textStyle,
-  );
+  const {
+    fillBackground,
+    fillForeground,
+    pasteFormatting,
+    removeFormatting,
+    copyFormatting,
+  } = useToolbarStore((state) => state.textStyle);
 
   return (
     <>
@@ -88,6 +99,22 @@ export function TextStyle() {
           </PopoverContent>
         </Popover>
       )}
+
+      <GenericButton
+        button={copyFormatting}
+        tooltip="Copy formatting"
+        Icon={ClipboardCopy}
+      />
+      <GenericButton
+        button={pasteFormatting}
+        tooltip="Paste formatting"
+        Icon={ClipboardPaste}
+      />
+      <GenericButton
+        button={removeFormatting}
+        tooltip="Remove formatting"
+        Icon={Eraser}
+      />
     </>
   );
 }

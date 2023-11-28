@@ -5,7 +5,8 @@ interface GenericAction {
   disabled?: boolean;
   shortcut?: string;
 }
-interface Button extends GenericAction {
+
+export interface Button extends GenericAction {
   onClick: () => void;
 }
 
@@ -49,6 +50,9 @@ export interface ToolbarState {
   textStyle: {
     fillBackground?: FillColor;
     fillForeground?: FillColor;
+    copyFormatting?: Button;
+    pasteFormatting?: Button;
+    removeFormatting?: Button;
   };
 }
 
@@ -120,6 +124,21 @@ export const useToolbarStore = create<ToolbarState>()((set) => ({
             state.textStyle.fillForeground.color = color;
           }),
         );
+      },
+    },
+    copyFormatting: {
+      onClick: () => {
+        console.log('copy formatting');
+      },
+    },
+    pasteFormatting: {
+      onClick: () => {
+        console.log('paste formatting');
+      },
+    },
+    removeFormatting: {
+      onClick: () => {
+        console.log('remove formatting');
       },
     },
   },
